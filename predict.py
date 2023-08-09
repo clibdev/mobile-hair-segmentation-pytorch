@@ -8,16 +8,17 @@ from models import *
 
 
 def build_model(model_version, quantize, model_path, device) :
+    pretrained = False if model_path else True
     if model_version == 1:
         if quantize:
-            net = quantized_modelv1(pretrained=True).to(device)
+            net = quantized_modelv1(pretrained=pretrained).to(device)
         else:
-            net = modelv1(pretrained=True).to(device)
+            net = modelv1(pretrained=pretrained).to(device)
     elif model_version == 2:
         if quantize:
-            net = quantized_modelv2(pretrained=True).to(device)
+            net = quantized_modelv2(pretrained=pretrained).to(device)
         else:
-            net = modelv2(pretrained=True).to(device)
+            net = modelv2(pretrained=pretrained).to(device)
     else:
         raise Exception('[!] Unexpected model version')
 
@@ -28,7 +29,7 @@ def build_model(model_version, quantize, model_path, device) :
 def load_model(net, model_path, device):
     if model_path:
         print(f'[*] Load Model from {model_path}')
-        net.load_state_dict(torch.load(model_path, map_location=device)['state_dict'])
+        net.load_state_dict(torch.load(model_path, map_location=device))
 
     return net
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--model_version', type=int, default=2, help='MobileHairNet version')
     parser.add_argument('--quantize', nargs='?', const=True, default=False, help='load and train quantizable model')
-    parser.add_argument('--model_path', type=str, default=None)
+    parser.add_argument('--model_path', type=str, default='./hairmattenet_v2.pth')
     parser.add_argument('-i', '--image_path', type=str, default='./image/5930.jpg', help='path of the image')
     parser.add_argument('-o', '--result_path', type=str, default='./image/5930_out.jpg', help='path of the image')
 

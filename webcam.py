@@ -27,16 +27,17 @@ def get_mask(image, net, size=224):
 
 
 def build_model(model_version, quantize, model_path, device) -> nn.Module:
+    pretrained = False if model_path else True
     if model_version == 1:
         if quantize:
-            net = quantized_modelv1(pretrained=True).to(device)
+            net = quantized_modelv1(pretrained=pretrained).to(device)
         else:
-            net = modelv1(pretrained=True).to(device)
+            net = modelv1(pretrained=pretrained).to(device)
     elif model_version == 2:
         if quantize:
-            net = quantized_modelv2(pretrained=True).to(device)
+            net = quantized_modelv2(pretrained=pretrained).to(device)
         else:
-            net = modelv2(pretrained=True).to(device)
+            net = modelv2(pretrained=pretrained).to(device)
     else:
         raise Exception('[!] Unexpected model version')
 
@@ -47,7 +48,7 @@ def build_model(model_version, quantize, model_path, device) -> nn.Module:
 def load_model(net, model_path, device) -> nn.Module:
     if model_path:
         print(f'[*] Load Model from {model_path}')
-        net.load_state_dict(torch.load(model_path, map_location=device)['state_dict'])
+        net.load_state_dict(torch.load(model_path, map_location=device))
 
     return net
     
@@ -65,7 +66,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_version', type=int, default=2, help='MobileHairNet version')
     parser.add_argument('--quantize', nargs='?', const=True, default=False, help='load and train quantizable model')
-    parser.add_argument('--model_path', type=str, default=None)
+    parser.add_argument('--model_path', type=str, default='./hairmattenet_v2.pth')
     
     args = parser.parse_args()
     device = torch.device("cuda:0" if torch.cuda.is_available() and not args.quantize else "cpu")
