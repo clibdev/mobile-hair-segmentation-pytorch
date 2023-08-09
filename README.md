@@ -1,3 +1,21 @@
+# Fork of [wonbeomjang/mobile-hair-segmentation-pytorch](https://github.com/wonbeomjang/mobile-hair-segmentation-pytorch)
+
+Differences between original repository and fork:
+
+* Compatibility with PyTorch >=2.0. (🔥)
+
+# Installation
+
+```shell
+pip install -r requirements.txt
+```
+
+
+
+
+
+
+
 # mobile-hair-segmentation-pytorch
 This repository is part of a program for previewing your own dyeing on mobile device.
 To do this, you need to separate the hair from the head.
@@ -12,10 +30,6 @@ This model MobileNet + SegNet.
 To do semantic segmentation they transform MobileNet like SegNet.
 And add additional loss function to capture fine hair texture.
 
-## install requirements
-```bash
-pip install -r requirements.txt
-```
 ## model performance (on CPU)
 |                        | IOU (%) | inference speed (ms) | model size (MB) |
 |:----------------------:|:-------:|:--------------------:|:---------------:|
