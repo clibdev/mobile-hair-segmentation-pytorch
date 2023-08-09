@@ -7,3 +7,5 @@ image_preproce*ss.py
 results.csv
 wandb
 .ts
+*.pth
+*.onnx

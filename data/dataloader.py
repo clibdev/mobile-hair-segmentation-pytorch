@@ -49,7 +49,7 @@ def transform(image, mask, image_size=224):
     #     image = TF.vflip(image)
     #     mask = TF.vflip(mask)
 
-    resize = transforms.Resize(size=(image_size, image_size))
+    resize = transforms.Resize(size=(image_size, image_size), antialias=False)
     image = resize(image)
     mask = resize(mask)
 

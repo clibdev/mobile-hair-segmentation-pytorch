@@ -29,14 +29,14 @@ def get_mask(image, net, size=224):
 def build_model(model_version, quantize, model_path, device) -> nn.Module:
     if model_version == 1:
         if quantize:
-            net = quantized_modelv1(pretrained=True, device=device).to(device)
+            net = quantized_modelv1(pretrained=True).to(device)
         else:
-            net = modelv1(pretrained=True, device=device).to(device)
+            net = modelv1(pretrained=True).to(device)
     elif model_version == 2:
         if quantize:
-            net = quantized_modelv2(pretrained=True, device=device).to(device)
+            net = quantized_modelv2(pretrained=True).to(device)
         else:
-            net = modelv2(pretrained=True, device=device).to(device)
+            net = modelv2(pretrained=True).to(device)
     else:
         raise Exception('[!] Unexpected model version')
 

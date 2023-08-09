@@ -8,7 +8,7 @@ from data.utils import check_data
 
 
 def transform(image, mask, image_size=224):
-    resize = transforms.Resize(size=(image_size, image_size))
+    resize = transforms.Resize(size=(image_size, image_size), antialias=False)
     image = resize(image)
     mask = resize(mask)
 

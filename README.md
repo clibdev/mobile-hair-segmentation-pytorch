@@ -3,6 +3,10 @@
 Differences between original repository and fork:
 
 * Compatibility with PyTorch >=2.0. (🔥)
+* Installation with updated [requirements.txt](requirements.txt) file.
+* The following errors and warnings has been fixed:
+  * TypeError: model got an unexpected keyword argument 'device'.
+  * UserWarning: The default value of the antialias parameter of all the resizing transforms will change from None to True.
 
 # Installation
 
