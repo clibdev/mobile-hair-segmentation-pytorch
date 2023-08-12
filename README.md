@@ -18,10 +18,10 @@ pip install -r requirements.txt
 
 # Pretrained models
 
-| Name                          | IoU (%) | Link                                                                                           |
-|-------------------------------|---------|------------------------------------------------------------------------------------------------|
-| MobileHairNetV1 (MobileNetV1) | 92.48   | [PyTorch](https://github.com/clibdev/yolov5-face/releases/latest/download/hairmattenet_v1.pth) |
-| MobileHairNetV2 (MobileNetV2) | 93.21   | [PyTorch](https://github.com/clibdev/yolov5-face/releases/latest/download/hairmattenet_v2.pth) |
+| Name                          | IoU (%) | Link                                                                                                                |
+|-------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
+| MobileHairNetV1 (MobileNetV1) | 92.48   | [PyTorch](https://github.com/clibdev/mobile-hair-segmentation-pytorch/releases/latest/download/hairmattenet_v1.pth) |
+| MobileHairNetV2 (MobileNetV2) | 93.21   | [PyTorch](https://github.com/clibdev/mobile-hair-segmentation-pytorch/releases/latest/download/hairmattenet_v2.pth) |
 
 # Inference
 
