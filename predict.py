@@ -31,6 +31,8 @@ def load_model(net, model_path, device):
         print(f'[*] Load Model from {model_path}')
         net.load_state_dict(torch.load(model_path, map_location=device))
 
+    net.eval()
+
     return net
 
 
@@ -44,11 +46,12 @@ def predict(args):
     image = TF.resize(image, [224, 224], antialias=False)
     image = TF.normalize(image, [0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
 
-    mask = net(image.unsqueeze(0))
-    mask = mask.argmax(dim=1)
-    mask = TF.resize(mask, [w, h], antialias=False).squeeze()
+    with torch.no_grad():
+        mask = net(image.unsqueeze(0))
+        mask = mask.argmax(dim=1)
+        mask = TF.resize(mask, [w, h], antialias=False).squeeze()
 
-    save_image(mask.float(), args.result_path)
+        save_image(mask.float(), args.result_path)
 
 
 if __name__ == "__main__":
