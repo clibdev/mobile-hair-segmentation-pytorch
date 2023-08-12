@@ -15,13 +15,15 @@ def get_mask(image, net, size=224):
     down_size_image = torch.from_numpy(down_size_image).float().div(255.0).unsqueeze(0)
     down_size_image = np.transpose(down_size_image, (0, 3, 1, 2)).to(device)
     down_size_image = TF.normalize(down_size_image, [0.5, 0.5, 0.5], [0.5, 0.5, 0.5])
-    mask: torch.nn.Module = net(down_size_image)
 
-    # mask = torch.squeeze(mask[:, 1, :, :])
-    mask = mask.argmax(dim=1).squeeze()
-    mask_cv2 = mask.data.cpu().numpy() * 255
-    mask_cv2 = mask_cv2.astype(np.uint8)
-    mask_cv2 = cv2.resize(mask_cv2, (image_w, image_h))
+    with torch.no_grad():
+        mask = net(down_size_image)
+
+        # mask = torch.squeeze(mask[:, 1, :, :])
+        mask = mask.argmax(dim=1).squeeze()
+        mask_cv2 = mask.data.cpu().numpy()
+        mask_cv2 = mask_cv2.astype(np.uint8)
+        mask_cv2 = cv2.resize(mask_cv2, (image_w, image_h))
 
     return mask_cv2
 
@@ -49,6 +51,8 @@ def load_model(net, model_path, device) -> nn.Module:
     if model_path:
         print(f'[*] Load Model from {model_path}')
         net.load_state_dict(torch.load(model_path, map_location=device))
+
+    net.eval()
 
     return net
     
