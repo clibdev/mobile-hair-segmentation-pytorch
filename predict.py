@@ -29,7 +29,7 @@ def build_model(model_version, quantize, model_path, device) :
 def load_model(net, model_path, device):
     if model_path:
         print(f'[*] Load Model from {model_path}')
-        net.load_state_dict(torch.load(model_path, map_location=device))
+        net.load_state_dict(torch.load(model_path, map_location=device, weights_only=True))
 
     net.eval()
 

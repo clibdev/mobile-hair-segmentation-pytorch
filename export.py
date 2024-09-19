@@ -22,7 +22,7 @@ if __name__ == '__main__':
         raise Exception('[!] Unexpected model version')
 
     if args.model_path:
-        net.load_state_dict(torch.load(args.model_path, map_location=device))
+        net.load_state_dict(torch.load(args.model_path, map_location=device, weights_only=True))
 
     net.eval()
 
